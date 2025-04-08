@@ -9,9 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Install newman
         run: npm install -g newman
+
       - name: Run collection
         run: |
-         newman run demo.postman_collection.json \-e demo.postman_environment.json \ --insecure \  --reporters cli,junit \ --reporter-junit-export results.xml
+          newman run demo.postman_collection.json \
+            -e demo.postman_environment.json \
+            --insecure \
+            --reporters cli,junit \
+            --reporter-junit-export results.xml
+
+      - name: Upload results.xml as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: postman-results
+          path: results.xml
 
