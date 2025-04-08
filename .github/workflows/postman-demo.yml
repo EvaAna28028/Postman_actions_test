@@ -13,4 +13,5 @@ jobs:
         run: npm install -g newman
       - name: Run collection
         run: |
-          newman run demo.postman_collection.json -e demo.postman_environment.json --insecure
+         newman run demo.postman_collection.json \-e demo.postman_environment.json \ --insecure \  --reporters cli,junit \ --reporter-junit-export results.xml
+
